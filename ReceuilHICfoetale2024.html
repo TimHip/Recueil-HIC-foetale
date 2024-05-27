@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recueil de Données HIC Fœtale</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 90vh;
+            width: 80%;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .accordion {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            margin-bottom: 10px;
+        }
+        .accordion.active, .accordion:hover {
+            background-color: #0056b3;
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            display: none;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Recueil de Données HIC Fœtale</h2>
+        <form id="dataForm">
+            
+            <!-- Identité de la patiente -->
+            <button type="button" class="accordion">Identité de la patiente</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="numero_iep_patiente">Numéro IEP Patiente :</label>
+                    <input type="text" id="numero_iep_patiente" name="numero_iep_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="nom_patiente">Nom Patiente :</label>
+                    <input type="text" id="nom_patiente" name="nom_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom_patiente">Prénom Patiente :</label>
+                    <input type="text" id="prenom_patiente" name="prenom_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_naissance_patiente">Date de Naissance Patiente :</label>
+                    <input type="date" id="date_naissance_patiente" name="date_naissance_patiente" required>
+                </div>
+            </div>
+            
+            <!-- Identité du foetus si connu -->
+            <button type="button" class="accordion">Identité du foetus si connu</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="numero_iep_foetus">Numéro IEP Foetus :</label>
+                    <input type="text" id="numero_iep_foetus" name="numero_iep_foetus" required>
+                </div>
+                <div class="form-group">
+                    <label for="nom_foetus">Nom Foetus :</label>
+                    <input type="text" id="nom_foetus" name="nom_foetus" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom_foetus">Prénom Foetus :</label>
+                    <input type="text" id="prenom_foetus" name="prenom_foetus" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_naissance_foetus">Date de Naissance Foetus :</label>
+                    <input type="date" id="date_naissance_foetus" name="date_naissance_foetus" required>
+                </div>
+            </div>
+
+            <!-- Contexte de la patiente -->
+            <button type="button" class="accordion">Contexte de la patiente</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="poids_patiente">Poids Patiente :</label>
+                    <input type="number" id="poids_patiente" name="poids_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="taille_patiente">Taille Patiente :</label>
+                    <input type="number" id="taille_patiente" name="taille_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="imc_patiente">IMC Patiente :</label>
+                    <input type="number" id="imc_patiente" name="imc_patiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="gestite">Gestité :</label>
+                    <input type="number" id="gestite" name="gestite" required>
+                </div>
+                <div class="form-group">
+                    <label for="parite">Parité :</label>
+                    <input type="number" id="parite" name="parite" required>
+                </div>
+                <div class="form-group">
+                    <label for="fcs">FCS :</label>
+                    <input type="number" id="fcs" name="fcs" required>
+                </div>
+                <div class="form-group">
+                    <label for="pathologie_hemorragique_constitutionnelle">Pathologie hémorragique constitutionnelle :</label>
+                    <select id="pathologie_hemorragique_constitutionnelle" name="pathologie_hemorragique_constitutionnelle" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="etiologie_pathologie">Si présence, quelle étiologie ? :</label>
+                    <input type="text" id="etiologie_pathologie" name="etiologie_pathologie">
+                </div>
+                <div class="form-group">
+                    <label for="purpura_thrombopenie_idiopathique">Purpura thrombopénie idiopathique :</label>
+                    <select id="purpura_thrombopenie_idiopathique" name="purpura_thrombopenie_idiopathique" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alloimmunisation_plaquettaire">Alloimmunisation plaquettaire :</label>
+                    <select id="alloimmunisation_plaquettaire" name="alloimmunisation_plaquettaire" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type_alloimmunisation">Si présence, quel type ? :</label>
+                    <input type="text" id="type_alloimmunisation" name="type_alloimmunisation">
+                </div>
+                <div class="form-group">
+                    <label for="atcd_img">ATCD d'IMG :</label>
+                    <select id="atcd_img" name="atcd_img" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="raison_img">Si oui, pour quelle raison ? :</label>
+                    <input type="text" id="raison_img" name="raison_img">
+                </div>
+                <div class="form-group">
+                    <label for="atcd_miu">ATCD de MIU :</label>
+                    <select id="atcd_miu" name="atcd_miu" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="etiologie_miu">Si oui, quelle étiologie ? :</label>
+                    <input type="text" id="etiologie_miu" name="etiologie_miu">
+                </div>
+                <div class="form-group">
+                    <label for="hyperemese_gravidique">Notion d'hyperémèse gravidique :</label>
+                    <select id="hyperemese_gravidique" name="hyperemese_gravidique" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hypovitaminose_k">Hypovitaminose K documentée :</label>
+                    <select id="hypovitaminose_k" name="hypovitaminose_k" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medicament_risque_hemorragique">Prise de médicament connu à risque hémorragique :</label>
+                    <select id="medicament_risque_hemorragique" name="medicament_risque_hemorragique" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medicament_nom">Si oui, lequel ? :</label>
+                    <input type="text" id="medicament_nom" name="medicament_nom">
+                </div>
+            </div>
+
+            <!-- Contexte du conjoint -->
+            <button type="button" class="accordion">Contexte du conjoint</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="pathologie_hemorragique_familiale">Pathologie hémorragique constitutionnelle du conjoint :</label>
+                    <select id="pathologie_hemorragique_familiale" name="pathologie_hemorragique_familiale" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="etiologie_pathologie_familiale">Si présence, quelle étiologie ? :</label>
+                    <input type="text" id="etiologie_pathologie_familiale" name="etiologie_pathologie_familiale">
+                </div>
+            </div>
+
+            <!-- ATCD familial -->
+            <button type="button" class="accordion">ATCD familial</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="maladie_hemorragique_familiale">Maladie hémorragique familiale :</label>
+                    <select id="maladie_hemorragique_familiale" name="maladie_hemorragique_familiale" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="maladie_hemorragique_familiale_detail">Si oui, de quoi s'agit-il ? :</label>
+                    <input type="text" id="maladie_hemorragique_familiale_detail" name="maladie_hemorragique_familiale_detail">
+                </div>
+            </div>
+
+            <!-- Informations sur la grossesse -->
+            <button type="button" class="accordion">Informations sur la grossesse</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="date_debut_grossesse">Date de début de grossesse :</label>
+                    <input type="date" id="date_debut_grossesse" name="date_debut_grossesse" required>
+                </div>
+                <div class="form-group">
+                    <label for="type_grossesse">Type (0 : Unique, 1 : BiBi, 2 : MonoBi, 3 : MonoMono, 4 : Multiple) :</label>
+                    <select id="type_grossesse" name="type_grossesse" required>
+                        <option value="0">Unique</option>
+                        <option value="1">BiBi</option>
+                        <option value="2">MonoBi</option>
+                        <option value="3">MonoMono</option>
+                        <option value="4">Multiple</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pre_eclampsie">Pré-éclampsie :</label>
+                    <select id="pre_eclampsie" name="pre_eclampsie" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="autre_pathologie">Autre :</label>
+                    <input type="text" id="autre_pathologie" name="autre_pathologie">
+                </div>
+            </div>
+
+            <!-- Données échographiques -->
+            <button type="button" class="accordion">Données échographiques</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="age_gestationnel_decouverte">Âge gestationnel à la découverte :</label>
+                    <input type="number" id="age_gestationnel_decouverte" name="age_gestationnel_decouverte" required>
+                </div>
+                <div class="form-group">
+                    <label for="type_anomalie_cerebrale">Type d'anomalie cérébrale :</label>
+                    <select id="type_anomalie_cerebrale" name="type_anomalie_cerebrale" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Aucune</option>
+                        <option value="1">Ventriculomégalie</option>
+                        <option value="2">Lésions parenchymateuses</option>
+                        <option value="3">Les 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stade_lesion_cerebrale">Si lésion cérébrale : quel stade selon classification PAPILLE :</label>
+                    <select id="stade_lesion_cerebrale" name="stade_lesion_cerebrale" required>
+                        <option value="NA">NA</option>
+                        <option value="1">Hémorragie sous épendymaire isolée</option>
+                        <option value="2">Hémorragie intraventriculaire modérée, moins de 50% du ventricule, dilatation absente ou minime</option>
+                        <option value="3">Hémorragie intraventriculaire avec dilatation +/- importante</option>
+                        <option value="4">Hémorragie intraventriculaire avec lésions parenchymateuses associées</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pag_rciu">PAG / RCIU :</label>
+                    <select id="pag_rciu" name="pag_rciu" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Eutrophe</option>
+                        <option value="1">Inférieur au 10e p</option>
+                        <option value="2">Inférieur au 3e p</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cn_t1">CN à la T1 ? :</label>
+                    <input type="text" id="cn_t1" name="cn_t1" required>
+                </div>
+                <div class="form-group">
+                    <label for="autres_signes">Autres signes :</label>
+                    <input type="text" id="autres_signes" name="autres_signes">
+                </div>
+            </div>
+
+            <!-- Données IRM -->
+            <button type="button" class="accordion">Données IRM</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="irm">IRM :</label>
+                    <select id="irm" name="irm" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Non faite</option>
+                        <option value="1">Faite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age_gestationnel_realisation_irm">Âge gestationnel à la réalisation :</label>
+                    <input type="number" id="age_gestationnel_realisation_irm" name="age_gestationnel_realisation_irm" required>
+                </div>
+                <div class="form-group">
+                    <label for="type_anomalie_cerebrale_irm">Type d'anomalie cérébrale (IRM) :</label>
+                    <select id="type_anomalie_cerebrale_irm" name="type_anomalie_cerebrale_irm" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Aucune</option>
+                        <option value="1">Ventriculomégalie</option>
+                        <option value="2">Lésions parenchymateuses</option>
+                        <option value="3">Les 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stade_lesion_cerebrale_irm">Si lésion cérébrale : quel stade selon classification PAPILLE (IRM) :</label>
+                    <select id="stade_lesion_cerebrale_irm" name="stade_lesion_cerebrale_irm" required>
+                        <option value="NA">NA</option>
+                        <option value="1">Hémorragie sous épendymaire isolée</option>
+                        <option value="2">Hémorragie intraventriculaire modérée, moins de 50% du ventricule, dilatation absente ou minime</option>
+                        <option value="3">Hémorragie intraventriculaire avec dilatation +/- importante</option>
+                        <option value="4">Hémorragie intraventriculaire avec lésions parenchymateuses associées</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="autres_signes_irm">Autres signes (IRM) :</label>
+                    <input type="text" id="autres_signes_irm" name="autres_signes_irm" required>
+                </div>
+            </div>
+
+            <!-- DAN -->
+            <button type="button" class="accordion">DAN</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="hemorragie_antenatal">Hémorragie suspectée en anténatal :</label>
+                    <select id="hemorragie_antenatal" name="hemorragie_antenatal" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amniocentese">Amniocentèse :</label>
+                    <select id="amniocentese" name="amniocentese" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Non faite</option>
+                        <option value="1">Faite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pourquoi_amniocentese_non">Si non, pourquoi ? :</label>
+                    <input type="text" id="pourquoi_amniocentese_non" name="pourquoi_amniocentese_non">
+                </div>
+                <div class="form-group">
+                    <label for="cgh">CGH :</label>
+                    <select id="cgh" name="cgh" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Normale</option>
+                        <option value="1">Anormale</option>
+                        <option value="2">Non faite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cgh_etiologie">Si anormale, étiologie ? :</label>
+                    <input type="text" id="cgh_etiologie" name="cgh_etiologie">
+                </div>
+                <div class="form-group">
+                    <label for="recherche_moleculaire">Recherche moléculaire spécifique :</label>
+                    <select id="recherche_moleculaire" name="recherche_moleculaire">
+                        <option value="NA">NA</option>
+                        <option value="0">Non faite</option>
+                        <option value="1">Faite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recherche_moleculaire_detail">Si oui, quoi ? :</label>
+                    <input type="text" id="recherche_moleculaire_detail" name="recherche_moleculaire_detail">
+                </div>
+                <div class="form-group">
+                    <label for="resultat_moleculaire">Et résultat ?</label>
+                    <select id="resultat_moleculaire" name="resultat_moleculaire">
+                        <option value="NA">NA</option>
+                        <option value="0">Négatif</option>
+                        <option value="1">Positif</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bilan_infectieux">Bilan infectieux :</label>
+                    <select id="bilan_infectieux" name="bilan_infectieux" required>
+                        <option value="NA">NA</option>
+                        <option value="0">Négatif</option>
+                        <option value="1">Positif</option>
+                        <option value="2">Non fait</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alloimmunisation_plaquettaire">Recherche d'alloimmunisation plaquettaire :</label>
+                    <select id="alloimmunisation_plaquettaire" name="alloimmunisation_plaquettaire" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alloimmunisation_plaquettaire_resultat">Si oui, résultat ? :</label>
+                    <input type="text" id="alloimmunisation_plaquettaire_resultat" name="alloimmunisation_plaquettaire_resultat">
+                        <option value="NA">NA</option>
+                        <option value="0">Normale</option>
+                        <option value="1">Anormale</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alloimmunisation_type">Si anormal, quel type ? :</label>
+                    <input type="text" id="alloimmunisation_type" name="alloimmunisation_type">
+                </div>
+            </div>
+
+            <!-- Issue de grossesse -->
+            <button type="button" class="accordion">Issue de grossesse</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="etat_naissance">État à la naissance :</label>
+                    <input type="text" id="etat_naissance" name="etat_naissance" required>
+                </div>
+                <div class="form-group">
+                    <label for="terme">Terme :</label>
+                    <input type="text" id="terme" name="terme" required>
+                </div>
+                <div class="form-group">
+                    <label for="poids_naissance">Poids :</label>
+                    <input type="number" id="poids_naissance" name="poids_naissance" required>
+                </div>
+                <div class="form-group">
+                    <label for="taille_naissance">Taille :</label>
+                    <input type="number" id="taille_naissance" name="taille_naissance" required>
+                </div>
+                <div class="form-group">
+                    <label for="perimetre_cranien">Périmètre crânien :</label>
+                    <input type="number" id="perimetre_cranien" name="perimetre_cranien" required>
+                </div>
+                <div class="form-group">
+                    <label for="img">IMG :</label>
+                    <select id="img" name="img" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isg">ISG :</label>
+                    <select id="isg" name="isg" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="miu">MIU :</label>
+                    <select id="miu" name="miu" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age_gestationnel_incident">Âge gestationnel de l'incident :</label>
+                    <input type="number" id="age_gestationnel_incident" name="age_gestationnel_incident" required>
+                </div>
+                <div class="form-group">
+                    <label for="particularite_clinique">Particularité clinique :</label>
+                    <input type="text" id="particularite_clinique" name="particularite_clinique" required>
+                </div>
+                <div class="form-group">
+                    <label for="particularite_clinique_detail">Si oui, laquelle ? :</label>
+                    <input type="text" id="particularite_clinique_detail" name="particularite_clinique_detail">
+                </div>
+                <div class="form-group">
+                    <label for="autres">Autres :</label>
+                    <input type="text" id="autres" name="autres" required>
+                </div>
+            </div>
+
+            <!-- Bilan post natal -->
+            <button type="button" class="accordion">Bilan post natal</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="Fait / Non fait">Fait / Non fait :</label>
+                    <select id="Fait / Non fait" name="Fait / Non fait" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recherche_alloimmunisation_parents">Recherche d'alloimmunisation parents :</label>
+                    <select id="recherche_alloimmunisation_parents" name="recherche_alloimmunisation_parents" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recherche_alloimmunisation_parents_resultat">Si oui, résultats ? :</label>
+                    <input type="text" id="recherche_alloimmunisation_parents_resultat" name="recherche_alloimmunisation_parents_resultat">
+                </div>
+                <div class="form-group">
+                    <label for="recherche_alloimmunisation_enfant">Recherche d'alloimmunisation enfant :</label>
+                    <select id="recherche_alloimmunisation_enfant" name="recherche_alloimmunisation_enfant" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recherche_alloimmunisation_enfant_resultat">Si oui, résultats ? :</label>
+                    <input type="text" id="recherche_alloimmunisation_enfant_resultat" name="recherche_alloimmunisation_enfant_resultat">
+                </div>
+                <div class="form-group">
+                    <label for="numeration_plaquettaire">Numération plaquettaire :</label>
+                    <select id="numeration_plaquettaire" name="numeration_plaquettaire" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numeration_plaquettaire_resultat">Si faite, résultats ? :</label>
+                    <input type="text" id="numeration_plaquettaire_resultat" name="numeration_plaquettaire_resultat">
+                </div>
+                <div class="form-group">
+                    <label for="etf">ETF :</label>
+                    <select id="etf" name="etf" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="etf_resultat">Si faite, résultats ? :</label>
+                    <input type="text" id="etf_resultat" name="etf_resultat">
+                </div>
+                <div class="form-group">
+                    <label for="irm_resultat">IRM :</label>
+                    <select id="irm_resultat" name="irm_resultat" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lesion_cerebrale_classification_priva">Si lésion cérébrale, classification PAPILLE :</label>
+                    <select id="lesion_cerebrale_classification_priva" name="lesion_cerebrale_classification_priva">
+                        <option value="NA">NA</option>
+                        <option value="1">Hémorragie sous épendymaire isolée</option>
+                        <option value="2">Hémorragie intraventriculaire modérée, moins de 50% du ventricule, dilatation absente ou minime</option>
+                        <option value="3">Hémorragie intraventriculaire avec dilatation +/- importante</option>
+                        <option value="4">Hémorragie intraventriculaire avec lésions parenchymateuses associées</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foetopathologie">Foetopathologie :</label>
+                    <select id="foetopathologie" name="foetopathologie" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foetopathologie_resultat">Si faite, résultats ? :</label>
+                    <input type="text" id="foetopathologie_resultat" name="foetopathologie_resultat">
+                </div>
+                <div class="form-group">
+                    <label for="conseil_genetique">Conseil génétique :</label>
+                    <select id="conseil_genetique" name="conseil_genetique">
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <button type="button" class="accordion">Conclusion</button>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="diagnostic_final">Diagnostic final :</label>
+                    <input type="text" id="diagnostic_final" name="diagnostic_final" required>
+                </div>
+                <div class="form-group">
+                    <label for="etiologie_finale">Étiologie finale :</label>
+                    <select id="etiologie_finale" name="etiologie_finale" required>
+                        <option value="NA">NA</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="etiologie_finale_detail">Si trouvée, laquelle ? :</label>
+                    <input type="text" id="etiologie_finale_detail" name="etiologie_finale_detail">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Soumettre</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Script pour les sections accordéon
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            var data = {};
+            formData.forEach((value, key) => { data[key] = value });
+
+            fetch('https://script.google.com/macros/s/AKfycbxHBJ6E27AEEKgeIlB0pWatmT6GsgtWIEyeX20RNR6hQzrnk-BR0O7hfPi94fhRxKwk4Q/exec', { // Remplacez YOUR_SCRIPT_ID par l'ID de votre script Google Apps
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                alert('Données soumises avec succès');
+                event.target.reset();
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        });
+    </script>
+</body>
+</html>
