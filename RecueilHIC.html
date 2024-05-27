@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recueil de Données HIC Fœtale</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Recueil de Données HIC Fœtale</h2>
+        <form id="dataForm">
+            <div class="form-group">
+                <label for="col1">Colonne 1 :</label>
+                <input type="text" id="col1" name="col1" required>
+            </div>
+            <div class="form-group">
+                <label for="col2">Colonne 2 :</label>
+                <input type="text" id="col2" name="col2" required>
+            </div>
+            <!-- Ajouter d'autres champs selon les colonnes de votre Google Sheets -->
+            <div class="form-group">
+                <button type="submit">Soumettre</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            var data = {};
+            formData.forEach((value, key) => { data[key] = value });
+
+            fetch('https://script.google.com/macros/s/AKfycbxcvbF9fN8VTulonUOFBaJGVyXabaPHldDOIbKWzuapFfmY_eg1qPpltWt-xKoFHY9L/exec', { 
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                alert('Données soumises avec succès');
+                event.target.reset();
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        });
+    </script>
+</body>
+</html>
